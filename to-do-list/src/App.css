@@ -1,0 +1,9 @@
+.background {
+  align-items: center;
+  background-image: linear-gradient(to bottom, rgba(6, 75, 224, 0.774), rgba(113, 152, 238, 0.746));
+  display: flex;
+  height: auto;
+  justify-content: center;
+  max-width: 100vw;
+  min-height: 100vh;
+}

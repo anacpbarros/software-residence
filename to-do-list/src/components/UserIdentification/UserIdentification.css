@@ -1,0 +1,20 @@
+.container-user-identification {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+img {
+  border-radius: 50%;
+  border: 2px solid rgba(6, 75, 224, 0.774);
+  height: 80px;
+  object-fit: cover;
+  width: 80px;
+}
+
+p {
+  color: rgb(15, 80, 184);
+  font-size: 20px;
+  margin: 2px;
+}

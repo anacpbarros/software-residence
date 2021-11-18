@@ -1,0 +1,16 @@
+.input-action-bar {
+    align-items: center;
+    display: flex;
+    height: inherit;
+    justify-content: center;
+}
+
+.form-control {
+    margin-right: 20px;
+    max-width: 40vw;
+}
+
+.input-button {
+    box-shadow: #332c36 3px 3px;
+    cursor: pointer;
+}

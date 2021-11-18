@@ -1,0 +1,36 @@
+.container {
+  align-items: center;
+  background-color: lavender;
+  border-radius: 30px;
+  border: 2px solid rgba(145, 176, 241, 0.774);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin: 30px;
+  min-height: 80vh;
+  padding: 0;
+  width: 80vw;
+}
+
+.header {
+  background-color: #b9d2f8;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  height: auto;
+  width: 100%;
+}
+
+.action-bar {
+  height: 120px;
+  width: 100%;
+}
+
+.list-cards {
+  align-items: center;
+  border-top: 2px solid rgba(200, 212, 238, 0.774);
+  display: flex;
+  height: auto;
+  justify-content: center;
+  padding: 20px 0 40px 0;
+  width: 100%;
+}
