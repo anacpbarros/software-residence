@@ -1,2 +1,5 @@
 # software-residence
-Here are the projects that I've developed during my software residence in ReactJS and NodeJS.
+### Here are the projects I developed during my software residency: 
+
+- ReactJS: To Do List App 
+- NodeJS
