@@ -1,18 +1,6 @@
 .div-header Navbar {
-    align-items: center;
-    box-sizing: border-box;
     display: inline-flex;
-    flex-direction: row;
     justify-content: space-between;
     margin-bottom: -1rem;
-    padding: 30px 40px;
     width: 100%;
-}
-
-.navbar-brand {
-    color: rgb(15, 80, 184);
-}
-
-h3 {
-    color: rgb(15, 80, 184);
 }

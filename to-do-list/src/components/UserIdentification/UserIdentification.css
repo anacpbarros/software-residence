@@ -8,13 +8,13 @@
 .container-user-identification img {
   border-radius: 50%;
   border: 2px solid rgba(6, 75, 224, 0.774);
-  height: 80px;
+  height: 70px;
   object-fit: cover;
-  width: 80px;
+  width: 70px;
 }
 
 .container-user-identification p {
   color: rgb(15, 80, 184);
-  font-size: 20px;
+  font-size: 15px;
   margin: 2px;
 }

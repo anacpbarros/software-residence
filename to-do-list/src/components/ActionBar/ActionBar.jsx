@@ -5,28 +5,24 @@ import { Button, Form } from "react-bootstrap";
 import "./ActionBar.css";
 
 function ActionBar({
-  onChangeTitleValueHandler,
+  onChangeTitleHandler,
   onSubmit,
-  titleValue,
-  descriptionValue,
-  onChangeDescriptionValueHandler,
-  isInvalid
+  title,
+  description,
+  onChangeDescriptionHandler,
+  isInvalid,
 }) {
   return (
-    <Form
-      className="input-action-bar"
-      onSubmit={onSubmit}
-    >
+    <Form className="input-action-bar" onSubmit={onSubmit}>
       <div className="container-invalid">
         <Form.Control
           required
           isInvalid={isInvalid}
-          onChange={onChangeTitleValueHandler}
+          onChange={onChangeTitleHandler}
           placeholder="Insira uma tarefa..."
           type="text"
-          titleValue={titleValue}
+          title={title}
         />
-
         <Form.Control.Feedback type="invalid">
           Por favor, adicione um título para a sua tarefa.
         </Form.Control.Feedback>
@@ -34,10 +30,10 @@ function ActionBar({
       <Form.Control
         as="textarea"
         placeholder="Adicione uma descrição para a sua tarefa..."
-        descriptionValue={descriptionValue}
-        onChange={onChangeDescriptionValueHandler}
+        description={description}
+        onChange={onChangeDescriptionHandler}
       />
-      <Button className="input-button" type="submit" disabled={isInvalid} >
+      <Button className="input-button" type="submit" disabled={isInvalid}>
         Criar tarefa
       </Button>
     </Form>
@@ -45,12 +41,12 @@ function ActionBar({
 }
 
 ActionBar.propTypes = {
-  onChangeTitleValueHandler: PropTypes.func,
-  onChangeDescriptionValueHandler: PropTypes.func,
+  onChangeTitleHandler: PropTypes.func,
+  onChangeDescriptionHandler: PropTypes.func,
   onSubmit: PropTypes.func,
-  titleValue: PropTypes.string,
-  descriptionValue: PropTypes.string,
-  isInvalid: PropTypes.bool
+  title: PropTypes.string,
+  description: PropTypes.string,
+  isInvalid: PropTypes.bool,
 };
 
 export default ActionBar;

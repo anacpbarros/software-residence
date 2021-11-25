@@ -17,11 +17,10 @@ function Header({ children, title }) {
             <Nav.Link as={Link} to="/tarefas">
               Criar Tarefas
             </Nav.Link>
-            <Nav.Link as={Link} to="/tarefas/:id">
-              Detalhe das Tarefas
-            </Nav.Link>
           </Nav>
-          <UserIdentification>{children}</UserIdentification>
+          <Navbar.Collapse className="justify-content-end">
+            <UserIdentification>{children}</UserIdentification>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>

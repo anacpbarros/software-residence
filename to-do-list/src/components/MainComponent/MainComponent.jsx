@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import HomePage from "../HomePage/HomePage";
 import ActionBar from "../ActionBar/ActionBar";
 import CardsList from "../CardsList/CardsList";
-import DetailedCards from "../DetailedCards/DetailedCards";
+import TaskDetails from "../TaskDetails/TaskDetails";
 
 import {
   DEFAULT_LIST_CARDS_TEXT,
@@ -17,16 +17,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./MainComponent.css";
 
 function MainComponent() {
-  const [titleValue, setTitleValue] = useState("");
-  const [descriptionValue, setDescriptionValue] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [tasksList, setTasksList] = useState([]);
 
-  const onChangeTitleTaskHandler = (event) => {
-    setTitleValue(event.target.value);
+  const onChangeTitleHandler = (event) => {
+    setTitle(event.target.value);
   };
 
-  const onChangeDescriptionTaskHandler = (event) => {
-    setDescriptionValue(event.target.value);
+  const onChangeDescriptionHandler = (event) => {
+    setDescription(event.target.value);
   };
 
   const createTaskValue = (newTitleValue, newDescriptionValue) => {
@@ -35,8 +35,8 @@ function MainComponent() {
     });
   };
 
-  const blankSpace = titleValue.trim().length === 0;
-  const isInvalid = titleValue === "" || titleValue === undefined || blankSpace ? true : false;
+  const blankSpace = title.trim().length === 0;
+  const isInvalid = title === "" || title === undefined || blankSpace ? true : false;
 
   const clearFields = (event) => {
     Array.from(event.target).forEach((e) => (e.value = ""));
@@ -45,14 +45,12 @@ function MainComponent() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    createTaskValue(titleValue, descriptionValue);
+    createTaskValue(title, description);
 
     clearFields(event);
-    setTitleValue("");
-    setDescriptionValue("");
+    setTitle("");
+    setDescription("");
   };
-  console.log('descriptionValue: ', descriptionValue);
-  console.log('titleValue: ', titleValue);
 
   const onCheckHandler = (index) => {
     setTasksList(
@@ -71,15 +69,15 @@ function MainComponent() {
   let home = <HomePage />;
   let actionBar = (
     <ActionBar
-      titleValue={titleValue}
-      onChangeTitleValueHandler={onChangeTitleTaskHandler}
+      title={title}
+      onChangeTitleHandler={onChangeTitleHandler}
       onSubmit={onSubmitHandler}
-      onChangeDescriptionValueHandler={onChangeDescriptionTaskHandler}
+      onChangeDescriptionHandler={onChangeDescriptionHandler}
       isInvalid={isInvalid}
     />
   );
   let cardsList = <CardsList titleValue={tasksList} onCheckChangeHandler={onCheckHandler} />;
-  let detailedCards = <DetailedCards cardValue={tasksList} />;
+  let taskDetails = <TaskDetails cardValue={tasksList} />;
 
   return (
     <div className="container">
@@ -96,7 +94,7 @@ function MainComponent() {
       </Route>
       <Route path="/tarefas/:id">
         {tasksList.length > 0 ? (
-          <div className="detailed-cards">{detailedCards}</div>
+          <div className="detailed-cards">{taskDetails}</div>
         ) : (
           <p className="list-cards">{DEFAULT_LIST_CARDS_TEXT}</p>
         )}

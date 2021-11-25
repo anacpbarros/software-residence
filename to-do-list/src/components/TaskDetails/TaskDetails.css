@@ -18,9 +18,18 @@
     width: 80%;
 }
 
+.container-details h1 {
+    color: darkblue;
+    margin-bottom: 20px;
+}
+
 .container-details p {
     background-color: cornsilk;
-    border: solid 1px blue;
+    border: solid 1px rgba(145, 176, 241, 0.774);
+    margin-bottom: 20px;
+    text-align: justify;
+    width: 40vw;
+    min-height: 100px
 }
 
 .buttons button {
