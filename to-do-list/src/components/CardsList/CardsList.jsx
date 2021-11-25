@@ -6,15 +6,16 @@ import Tasks from "../Tasks/Tasks";
 
 import "./CardsList.css";
 
-function CardsList({ onChange, value }) {
-  const cards = value.map((t, index) =>
+function CardsList({ onCheckChangeHandler, titleValue }) {
+  const cards = titleValue.map((t, index) =>
     !t.checked ? (
       <ListGroup>
         <Tasks
           checked={t.checked}
           item={t.task}
           key={index}
-          onChange={() => onChange(index)}
+          id={index}
+          onChange={() => onCheckChangeHandler(index)}
         />
       </ListGroup>
     ) : null
@@ -24,8 +25,9 @@ function CardsList({ onChange, value }) {
 }
 
 CardsList.propTypes = {
-  onChange: PropTypes.func,
-  value: PropTypes.array,
+  onCheckChangeHandler: PropTypes.func,
+  titleValue: PropTypes.array,
+  id: PropTypes.number
 };
 
 export default CardsList;

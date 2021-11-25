@@ -4,20 +4,40 @@ import { Button, Form } from "react-bootstrap";
 
 import "./ActionBar.css";
 
-function ActionBar({ onChange, onSubmit, value }) {
-  const blankSpace = value && value.trim().length === 0;
-  const disableButton =
-    value === "" || value === undefined || blankSpace ? true : false;
-
+function ActionBar({
+  onChangeTitleValueHandler,
+  onSubmit,
+  titleValue,
+  descriptionValue,
+  onChangeDescriptionValueHandler,
+  isInvalid
+}) {
   return (
-    <Form className="input-action-bar" onSubmit={onSubmit}>
+    <Form
+      className="input-action-bar"
+      onSubmit={onSubmit}
+    >
+      <div className="container-invalid">
+        <Form.Control
+          required
+          isInvalid={isInvalid}
+          onChange={onChangeTitleValueHandler}
+          placeholder="Insira uma tarefa..."
+          type="text"
+          titleValue={titleValue}
+        />
+
+        <Form.Control.Feedback type="invalid">
+          Por favor, adicione um título para a sua tarefa.
+        </Form.Control.Feedback>
+      </div>
       <Form.Control
-        onChange={onChange}
-        placeholder="Insira uma tarefa..."
-        type="text"
-        value={value}
+        as="textarea"
+        placeholder="Adicione uma descrição para a sua tarefa..."
+        descriptionValue={descriptionValue}
+        onChange={onChangeDescriptionValueHandler}
       />
-      <Button className="input-button" type="submit" disabled={disableButton}>
+      <Button className="input-button" type="submit" disabled={isInvalid} >
         Criar tarefa
       </Button>
     </Form>
@@ -25,9 +45,12 @@ function ActionBar({ onChange, onSubmit, value }) {
 }
 
 ActionBar.propTypes = {
-  onChange: PropTypes.func,
+  onChangeTitleValueHandler: PropTypes.func,
+  onChangeDescriptionValueHandler: PropTypes.func,
   onSubmit: PropTypes.func,
-  value: PropTypes.string,
+  titleValue: PropTypes.string,
+  descriptionValue: PropTypes.string,
+  isInvalid: PropTypes.bool
 };
 
 export default ActionBar;

@@ -5,7 +5,7 @@
   justify-content: flex-end;
 }
 
-img {
+.container-user-identification img {
   border-radius: 50%;
   border: 2px solid rgba(6, 75, 224, 0.774);
   height: 80px;
@@ -13,7 +13,7 @@ img {
   width: 80px;
 }
 
-p {
+.container-user-identification p {
   color: rgb(15, 80, 184);
   font-size: 20px;
   margin: 2px;

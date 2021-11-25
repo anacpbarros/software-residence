@@ -21,7 +21,7 @@
 }
 
 .action-bar {
-  height: 120px;
+  height: auto;
   width: 100%;
 }
 
@@ -32,5 +32,13 @@
   height: auto;
   justify-content: center;
   padding: 20px 0 40px 0;
+  width: 100%;
+  color: rgb(15, 80, 184);
+  font-size: 20px;
+  margin: 2px;
+}
+
+.detailed-cards {
+  height: auto;
   width: 100%;
 }

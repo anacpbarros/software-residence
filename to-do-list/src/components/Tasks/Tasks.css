@@ -12,3 +12,7 @@
     margin: 0;
     text-align: left;
 }
+
+.list-group-item p, .list-group-item input {
+    cursor: pointer;
+}

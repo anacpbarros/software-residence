@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { Nav, Navbar, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import UserIdentification from "../UserIdentification/UserIdentification";
 
@@ -6,10 +8,23 @@ import "./Header.css";
 
 function Header({ children, title }) {
   return (
-    <div className="div-header">
-      <h3>{title}</h3>
-      <UserIdentification>{children}</UserIdentification>
-    </div>
+    <header className="div-header">
+      <Navbar>
+        <Container fluid>
+          <Navbar.Brand href="/">{title}</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Nav>
+            <Nav.Link as={Link} to="/tarefas">
+              Criar Tarefas
+            </Nav.Link>
+            <Nav.Link as={Link} to="/tarefas/:id">
+              Detalhe das Tarefas
+            </Nav.Link>
+          </Nav>
+          <UserIdentification>{children}</UserIdentification>
+        </Container>
+      </Navbar>
+    </header>
   );
 }
 
