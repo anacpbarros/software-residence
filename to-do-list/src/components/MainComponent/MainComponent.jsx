@@ -31,7 +31,7 @@ function MainComponent() {
 
   const createTaskValue = (newTitleValue, newDescriptionValue) => {
     setTasksList((prevState) => {
-      return [...prevState, { task: newTitleValue, description: newDescriptionValue, checked: false }];
+      return [...prevState, { title: newTitleValue, description: newDescriptionValue, checked: false }];
     });
   };
 
@@ -74,13 +74,12 @@ function MainComponent() {
       titleValue={titleValue}
       onChangeTitleValueHandler={onChangeTitleTaskHandler}
       onSubmit={onSubmitHandler}
-      descriptionValue={descriptionValue}
       onChangeDescriptionValueHandler={onChangeDescriptionTaskHandler}
       isInvalid={isInvalid}
     />
   );
   let cardsList = <CardsList titleValue={tasksList} onCheckChangeHandler={onCheckHandler} />;
-  let detailedCards = <DetailedCards titleValue={titleValue} descriptionValue={descriptionValue} />;
+  let detailedCards = <DetailedCards cardValue={tasksList} />;
 
   return (
     <div className="container">

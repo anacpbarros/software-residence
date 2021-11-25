@@ -1,13 +1,17 @@
 import PropTypes from "prop-types";
-import { useHistory } from 'react-router-dom';
+
+import { useHistory, useParams } from 'react-router-dom';
 
 import './DetailedCards.css';
 
-function DetailedCards ({ titleValue, descriptionValue }) {
+function DetailedCards ({ tasksList }) {
     const history = useHistory();
     const onClickHandler = () => {
         history.push('/tarefas');
     }
+    
+    const { id } = useParams();
+    const task = tasksList.filter((t, index) => index === id ? t : null );
 
     /* const cards = titleValue.map((t, index) =>
      (
@@ -30,8 +34,8 @@ function DetailedCards ({ titleValue, descriptionValue }) {
             </button>
             </div>
             <div className="container-details">
-            <h1>Title</h1>
-            <p>Description</p>
+            <h1>{task.title}</h1>
+            <p>{task.description}</p>
             <div className="buttons">
             <button>Concluir Tarefa</button>
             <button>Cancelar Tarefa</button>

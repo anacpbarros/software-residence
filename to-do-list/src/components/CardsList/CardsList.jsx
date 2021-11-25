@@ -12,8 +12,7 @@ function CardsList({ onCheckChangeHandler, titleValue }) {
       <ListGroup>
         <Tasks
           checked={t.checked}
-          item={t.task}
-          key={index}
+          item={t.title}
           id={index}
           onChange={() => onCheckChangeHandler(index)}
         />
@@ -27,7 +26,6 @@ function CardsList({ onCheckChangeHandler, titleValue }) {
 CardsList.propTypes = {
   onCheckChangeHandler: PropTypes.func,
   titleValue: PropTypes.array,
-  id: PropTypes.number
 };
 
 export default CardsList;
