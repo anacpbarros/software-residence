@@ -7,8 +7,6 @@ import "./ActionBar.css";
 function ActionBar({
   onChangeTitleHandler,
   onSubmit,
-  title,
-  description,
   onChangeDescriptionHandler,
   isInvalid,
 }) {
@@ -21,7 +19,6 @@ function ActionBar({
           onChange={onChangeTitleHandler}
           placeholder="Insira uma tarefa..."
           type="text"
-          title={title}
         />
         <Form.Control.Feedback type="invalid">
           Por favor, adicione um título para a sua tarefa.
@@ -30,7 +27,6 @@ function ActionBar({
       <Form.Control
         as="textarea"
         placeholder="Adicione uma descrição para a sua tarefa..."
-        description={description}
         onChange={onChangeDescriptionHandler}
       />
       <Button className="input-button" type="submit" disabled={isInvalid}>
@@ -44,8 +40,6 @@ ActionBar.propTypes = {
   onChangeTitleHandler: PropTypes.func,
   onChangeDescriptionHandler: PropTypes.func,
   onSubmit: PropTypes.func,
-  title: PropTypes.string,
-  description: PropTypes.string,
   isInvalid: PropTypes.bool,
 };
 

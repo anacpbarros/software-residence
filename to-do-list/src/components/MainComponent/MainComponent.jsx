@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Route, Redirect, Switch } from "react-router";
+import { Button, Spinner, Modal } from "react-bootstrap";
 
 import Header from "../Header/Header";
 import HomePage from "../HomePage/HomePage";
@@ -19,7 +20,46 @@ import "./MainComponent.css";
 function MainComponent() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tasksList, setTasksList] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [show, setShow] = useState(true);
+
+  const fetchTasksHandler = useCallback(() => {
+    setIsLoading(true);
+    fetch("http://localhost:3001/tarefas", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Algum erro aconteceu!");
+        return response.json();
+      })
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+    setIsLoading(false);
+  }, []);
+
+   const fetchSingleTasksHandler = useCallback(() => {
+    setIsLoading(true);
+    fetch("http://localhost:3001/tarefas:id", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Algum erro aconteceu!");
+        return response.json();
+      })
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+    setIsLoading(false);
+  }, []);
 
   const onChangeTitleHandler = (event) => {
     setTitle(event.target.value);
@@ -29,14 +69,19 @@ function MainComponent() {
     setDescription(event.target.value);
   };
 
-  const createTaskValue = (newTitleValue, newDescriptionValue) => {
-    setTasksList((prevState) => {
-      return [...prevState, { title: newTitleValue, description: newDescriptionValue, checked: false }];
+  const createTask = async (newTask) => {
+    await fetch("http://localhost:3001/tarefas", {
+      method: "POST",
+      body: JSON.stringify(newTask),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   };
 
   const blankSpace = title.trim().length === 0;
-  const isInvalid = title === "" || title === undefined || blankSpace ? true : false;
+  const isInvalid =
+    title === "" || title === undefined || blankSpace ? true : false;
 
   const clearFields = (event) => {
     Array.from(event.target).forEach((e) => (e.value = ""));
@@ -45,64 +90,82 @@ function MainComponent() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    createTaskValue(title, description);
+    createTask({ title, description });
 
     clearFields(event);
     setTitle("");
     setDescription("");
   };
 
-  const onCheckHandler = (index) => {
-    setTasksList(
-      tasksList.map((t, i) => {
-        if (i === index)
-          return {
-            ...t,
-            checked: !t.checked,
-          };
-        return t;
-      })
-    );
+  const handleClose = () => {
+    setShow(false);
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    fetchTasksHandler();
+  }, [fetchTasksHandler]);
 
   let header = <Header title={HEADER_TITLE} children={USER_NAME} />;
   let home = <HomePage />;
   let actionBar = (
     <ActionBar
-      title={title}
       onChangeTitleHandler={onChangeTitleHandler}
       onSubmit={onSubmitHandler}
       onChangeDescriptionHandler={onChangeDescriptionHandler}
       isInvalid={isInvalid}
     />
   );
-  let cardsList = <CardsList titleValue={tasksList} onCheckChangeHandler={onCheckHandler} />;
-  let taskDetails = <TaskDetails cardValue={tasksList} />;
+  let cardsList = <CardsList titleValue={tasks} />;
+  console.log("tasks: ", tasks);
+  let taskDetails = <TaskDetails cardValue={tasks} />;
+
+  const loading = (
+    <div className="loading">
+      <p>Carregando...</p>
+      <Spinner animation="border" variant="primary" />
+    </div>
+  );
 
   return (
     <div className="container">
       <div className="header">{header}</div>
-      <Switch>
-      <Route path="/" exact>{home}</Route>
-      <Route path="/tarefas" exact>
-        <div className="action-bar">{actionBar}</div>
-        {tasksList.length > 0 ? (
-          <div className="list-cards">{cardsList}</div>
-        ) : (
-          <p className="list-cards">{DEFAULT_LIST_CARDS_TEXT}</p>
-        )}
-      </Route>
-      <Route path="/tarefas/:id">
-        {tasksList.length > 0 ? (
-          <div className="detailed-cards">{taskDetails}</div>
-        ) : (
-          <p className="list-cards">{DEFAULT_LIST_CARDS_TEXT}</p>
-        )}
-      </Route>
-      <Route path="*">
-        <Redirect to="/" />
-      </Route>
-      </Switch>
+      <Button onClick={fetchTasksHandler}>Ver minha Lista</Button>
+      {!isLoading && !error && (
+        <Switch>
+          <Route path="/" exact>
+            {home}
+          </Route>
+          <Route path="/tarefas" exact>
+            <div className="action-bar">{actionBar}</div>
+            {tasks.length > 0 ? (
+              <div className="list-cards">{cardsList}</div>
+            ) : (
+              <p className="list-cards">{DEFAULT_LIST_CARDS_TEXT}</p>
+            )}
+          </Route>
+          <Route path="/tarefas/:id">
+            {tasks.length > 0 ? (
+              <div className="detailed-cards">{taskDetails}</div>
+            ) : (
+              <p className="list-cards">{DEFAULT_LIST_CARDS_TEXT}</p>
+            )}
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      )}
+      {isLoading && { loading }}
+      {isLoading && error && (
+        <>
+        {loading}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton onclose={handleClose} />
+          <Modal.Body>Ocorreu um erro</Modal.Body>
+        </Modal>
+        </>
+      )}
     </div>
   );
 }

@@ -1,30 +1,22 @@
 import PropTypes from "prop-types";
 
-import { ListGroup } from "react-bootstrap";
-
 import Tasks from "../Tasks/Tasks";
 
-import "./CardsList.css";
+import { ListGroup } from "react-bootstrap";
 
-function CardsList({ onCheckChangeHandler, titleValue }) {
-  const cards = titleValue.map((t, index) =>
-    !t.checked ? (
-      <ListGroup>
-        <Tasks
-          checked={t.checked}
-          item={t.title}
-          id={index}
-          onChange={() => onCheckChangeHandler(index)}
-        />
-      </ListGroup>
-    ) : null
+function CardsList({ titleValue }) {
+  const cards = titleValue.map((t) => (
+    <Tasks key={t.id} defaultChecked={false} item={t.title} task={t} />
+  ));
+
+  return (
+    <div className="cards">
+      <ListGroup>{cards}</ListGroup>
+    </div>
   );
-
-  return <div className="cards">{cards}</div>;
 }
 
 CardsList.propTypes = {
-  onCheckChangeHandler: PropTypes.func,
   titleValue: PropTypes.array,
 };
 
