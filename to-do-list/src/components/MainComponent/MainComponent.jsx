@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Route, Redirect, Switch, useHistory } from "react-router";
-import { Button, Spinner, Modal } from "react-bootstrap";
+import { Spinner, Modal } from "react-bootstrap";
 
 import Header from "../Header/Header";
 import HomePage from "../HomePage/HomePage";
@@ -141,7 +141,7 @@ function MainComponent() {
     fetchTasksHandler();
   };
 
-  let header = <Header title={HEADER_TITLE} children={USER_NAME} />;
+  let header = <Header title={HEADER_TITLE} children={USER_NAME} onClickOnPathHandler={fetchTasksHandler} />;
   let home = <HomePage />;
   let actionBar = (
     <ActionBar
@@ -207,7 +207,7 @@ function MainComponent() {
         <>
           {loading}
           <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton onclose={handleClose} />
+            <Modal.Header closeButton onClose={handleClose} />
             <Modal.Body>Ocorreu um erro</Modal.Body>
           </Modal>
         </>

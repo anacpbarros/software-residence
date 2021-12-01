@@ -6,7 +6,7 @@ import UserIdentification from "../UserIdentification/UserIdentification";
 
 import "./Header.css";
 
-function Header({ children, title }) {
+function Header({ children, title, onClickOnPathHandler }) {
   return (
     <header className="div-header">
       <Navbar>
@@ -14,7 +14,7 @@ function Header({ children, title }) {
           <Navbar.Brand href="/">{title}</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Nav>
-            <Nav.Link as={Link} to="/tarefas">
+            <Nav.Link as={Link} to="/tarefas" onClick={onClickOnPathHandler}>
               Criar Tarefas
             </Nav.Link>
           </Nav>
@@ -30,6 +30,7 @@ function Header({ children, title }) {
 Header.propTypes = {
   children: PropTypes.string,
   title: PropTypes.string,
+  onClickOnPathHandler: PropTypes.func
 };
 
 export default Header;
