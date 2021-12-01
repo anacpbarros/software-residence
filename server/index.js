@@ -30,8 +30,10 @@ app.put('/tarefas/:id', async (req, res) => {
     const { id } = req.params;
     const task = await Tasks.findOne({where: {id}});
     task.title = req.body.title;
+    task.description = req.body.description;
+    task.completed = req.body.completed;
     await task.save();
-    res.send('Tarefa atualizada com sucesso!');
+    res.send(task);
 });
 
 app.delete('/tarefas/:id', async (req, res) => {

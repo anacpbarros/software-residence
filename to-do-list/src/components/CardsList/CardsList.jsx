@@ -4,9 +4,12 @@ import Tasks from "../Tasks/Tasks";
 
 import { ListGroup } from "react-bootstrap";
 
-function CardsList({ titleValue }) {
+import './CardsList.css';
+
+function CardsList({ titleValue, onCheckHandler }) {
   const cards = titleValue.map((t) => (
-    <Tasks key={t.id} defaultChecked={false} item={t.title} task={t} />
+    <Tasks key={t.id} item={t.title} task={t} checked={t.completed} onChange={() =>onCheckHandler(t.id)} className={t.completed ? "checked" : " "}
+    />
   ));
 
   return (
@@ -18,6 +21,7 @@ function CardsList({ titleValue }) {
 
 CardsList.propTypes = {
   titleValue: PropTypes.array,
+  onCheckHandler: PropTypes.func,
 };
 
 export default CardsList;

@@ -1,4 +1,3 @@
-.cards {
-  display: flex;
-  flex-direction: column;
+.checked {
+  text-decoration: line-through;
 }
