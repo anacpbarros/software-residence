@@ -10,23 +10,23 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/tarefas', async (req, res) => {
+app.get('/produtos', async (req, res) => {
     const tasks = await Tasks.findAll();
     res.send(tasks);
 });
 
-app.get('/tarefas/:id', async (req, res) => {
+app.get('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     const task = await Tasks.findOne({where: {id}});
     res.send(task);
 });
 
-app.post('/tarefas', async (req, res) => {
+app.post('/produtos', async (req, res) => {
     const task = await Tasks.create(req.body);
     res.send(task);
 });
 
-app.put('/tarefas/:id', async (req, res) => {
+app.put('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     const task = await Tasks.findOne({where: {id}});
     task.title = req.body.title;
@@ -36,7 +36,7 @@ app.put('/tarefas/:id', async (req, res) => {
     res.send(task);
 });
 
-app.delete('/tarefas/:id', async (req, res) => {
+app.delete('/produtos/:id', async (req, res) => {
     const { id } = req.params;
     await Tasks.destroy({ where: { id }});
     res.send('Tarefa apagada com sucesso!');

@@ -1,22 +1,28 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('./database');
 
-class Tasks extends Model {}
+class Produtos extends Model {}
 
-Tasks.init({
+Produtos.init({
     title: {
         type: DataTypes.STRING
+    },
+    price: {
+        type: DataTypes.NUMBER
     },
     description: {
         type: DataTypes.STRING
     },
-    completed: {
+    selected: {
+        type: DataTypes.BOOLEAN
+    },
+    checked: {
         type: DataTypes.BOOLEAN
     }
 }, {
     sequelize,
-    modelName: 'tasks',
+    modelName: 'produtos',
     timestamps: false,
 });
 
-module.exports = Tasks;
+module.exports = Produtos;
