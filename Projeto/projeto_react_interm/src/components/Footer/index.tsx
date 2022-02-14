@@ -5,7 +5,7 @@ export const Footer = () => {
         <footer className="fixed-bottom">
             <Navbar bg="light" expand="lg">
                 <Container> 
-                    <NavbarBrand>React Course - Typescript</NavbarBrand>
+                    <NavbarBrand>Copyright© 2022</NavbarBrand>
                 </Container>
             </Navbar>
         </footer>

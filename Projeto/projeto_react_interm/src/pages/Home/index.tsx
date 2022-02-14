@@ -4,7 +4,7 @@ import { Cliente } from "../../types/cliente";
 import { CadastroClientes } from "../../components/CadastroClientes";
 import { usePost } from "../../hooks/customHooks";
 
-export const Clientes = () => {
+export const Home = () => {
   const { apiPost } = usePost("/clientes");
 
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -17,7 +17,11 @@ export const Clientes = () => {
 
   return (
     <Container>
-      <CadastroClientes onCadastroCliente={cadastrarCliente} />
+      <div className="cadastro-usuario">
+        <CadastroClientes onCadastroCliente={cadastrarCliente} />
+      </div>
+      <br/>
+      <div>Conteúdo</div>
     </Container>
   );
 };

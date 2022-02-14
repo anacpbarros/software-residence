@@ -169,7 +169,7 @@ export const CadastroClientes = (props: ClienteProps) => {
         </Row>
         <Col>
         <Button>
-
+          Cadastrar
         </Button>
         </Col>
       </Form>
