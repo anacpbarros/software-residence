@@ -11,8 +11,11 @@ app.use(cors())
 
 app.use(express.json());
 
-app.post('/usuario', async (req, res) => {
-    await Cliente.create(req.body);
-    res.send('Usuário cadastrado com sucesso!');
+app.post('/clientes', async (req, res) => {
+    const cliente = await Cliente.create(req.body);
+    res.send(cliente);
 });
 
+app.listen(3001, () => {
+    console.log("app is running")
+});

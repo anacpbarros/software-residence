@@ -125,7 +125,7 @@ export const CadastroClientes = (props: ClienteProps) => {
               <Form.Control
                 required
                 value={sobrenome}
-                name="idade"
+                name="sobrenome"
                 onChange={sobrenomeChangeHandler}
                 type="text"
                 placeholder="Sobrenome"
@@ -168,7 +168,7 @@ export const CadastroClientes = (props: ClienteProps) => {
           </Col>
         </Row>
         <Col>
-        <Button>
+        <Button type='submit'>
           Cadastrar
         </Button>
         </Col>
