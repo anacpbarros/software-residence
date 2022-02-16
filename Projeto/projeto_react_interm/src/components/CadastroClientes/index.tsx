@@ -96,7 +96,7 @@ export const CadastroClientes = (props: ClienteProps) => {
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-
+    
     const cliente = {
         nome: nome,
         sobrenome: sobrenome,
@@ -143,7 +143,7 @@ export const CadastroClientes = (props: ClienteProps) => {
                 name="senha"
                 onChange={senhaChangeHandler}
                 isValid={senhaState.isValid}
-                type="text"
+                type="password"
                 placeholder="Senha"
                 onBlur={validateSenhaHandler}
               />
