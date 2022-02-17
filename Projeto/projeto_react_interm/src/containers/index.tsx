@@ -7,7 +7,7 @@ export const Container = ({children}: {children: React.ReactNode}) => {
         <>
         <Header />
         <BContainer>
-            <div className='pt-1'>
+            <div className='container-fluid'>
                 {children}
             </div>
         </BContainer>

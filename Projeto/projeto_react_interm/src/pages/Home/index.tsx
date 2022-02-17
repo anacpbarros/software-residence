@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Container } from "../../containers";
 import { Cliente } from "../../types/cliente";
 import { Row, Col, Button } from "react-bootstrap";
-import { CadastroClientes } from "../../components/CadastroClientes";
 import { usePost } from "../../hooks/customHooks";
 import LoginHooks from "../../hooks/loginHooks";
 import './home.css';
+import { Landing } from "../../components/Landing";
+import { SignInUpModal } from "../../components/Modal";
 
 export const Home = () => {
   const { apiPost } = usePost("/clientes");
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const [clientes, setClientes] = useState<Cliente[]>([]);
   console.log("clientes", clientes);
@@ -18,22 +20,34 @@ export const Home = () => {
     await apiPost(cliente);
     setClientes([...clientes, cliente]);
   };
+  
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
 
   return (
-    <Container>
-      <Row>
-        <Col>
-         <div>Conteudoh</div>
-        </Col>
-        <Col>
-          <div className="pt-4">
+    <div className="landing-page">
+      <Container>
+        <SignInUpModal show={showModal} handleClose={handleClose} onCadastroCliente={cadastrarCliente}/>
+        <Row>
+          <Col>
+            <Landing />
+            <div className="d-grid gap-2 d-md-flex justify-content-md-evenly">
+              <Button onClick={handleShow}>Entrar</Button>
+              <Button>Cadastrar</Button>
+            </div>
             <LoginHooks />
-            <CadastroClientes onCadastroCliente={cadastrarCliente} />
-          </div>
-          <br />
-        </Col>
-      </Row>
-      <div>Conteúdo</div>
-    </Container>
+          </Col>
+          <Col>
+            <div className="pt-4">
+              
+            </div>
+            <br />
+          </Col>
+        </Row>
+        <div>Conteúdo</div>
+      </Container>
+    </div>
+
   );
 };

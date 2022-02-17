@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useReducer, useState } from "react";
+import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Cliente } from "../../types/cliente";
 
@@ -55,6 +55,7 @@ const senhaReducer = (state: { value: string}, action: { type: string, value: st
 
 interface ClienteProps {
   onCadastroCliente: (cliente: Cliente) => void;
+  submit: boolean;
 }
 
 export const CadastroClientes = (props: ClienteProps) => {
@@ -94,22 +95,26 @@ export const CadastroClientes = (props: ClienteProps) => {
     dispatchEmail({ type: 'INPUT_BLUR', value: ''})
   }
 
-  const submitHandler = (event: FormEvent) => {
-    event.preventDefault();
-    
+  useEffect(() => {
     const cliente = {
-        nome: nome,
-        sobrenome: sobrenome,
-        email: emailState.value,
-        senha: senhaState.value,
-    }
-    props.onCadastroCliente(cliente);
+      nome: nome,
+      sobrenome: sobrenome,
+      email: emailState.value,
+      senha: senhaState.value,
   }
+  props.onCadastroCliente(cliente);
+  }, [props.submit])
+  
+  // const submitHandler = (event: FormEvent) => {
+  //   event.preventDefault();
+    
+    
+  // }
 
   return (
     <div className="pt-4">
       <h5>Cadastro de usuário</h5>
-      <Form onSubmit={submitHandler}>
+      <Form>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="nome">
@@ -167,11 +172,6 @@ export const CadastroClientes = (props: ClienteProps) => {
             </Form.Group>
           </Col>
         </Row>
-        <Col>
-        <Button variant='primary' type='submit'>
-          Cadastrar
-        </Button>
-        </Col>
       </Form>
     </div>
   );
