@@ -104,7 +104,7 @@ export const CadastroClientes = (props: ClienteProps) => {
   }
   props.onCadastroCliente(cliente);
   }, [props.submit])
-  
+
   // const submitHandler = (event: FormEvent) => {
   //   event.preventDefault();
     
@@ -130,7 +130,7 @@ export const CadastroClientes = (props: ClienteProps) => {
               <Form.Control
                 required
                 value={sobrenome}
-                name="idade"
+                name="sobrenome"
                 onChange={sobrenomeChangeHandler}
                 type="text"
                 placeholder="Sobrenome"
