@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button, Modal } from "react-bootstrap"
-import { Cliente } from "../../types/cliente"
+import { Alert, Button, Modal } from "react-bootstrap"
+import { Cliente, TemporaryClientState } from "../../types/cliente"
 import { CadastroClientes } from "../CadastroClientes"
 
 interface ModalProps {
@@ -10,22 +10,43 @@ interface ModalProps {
 }
 
 export const SignInUpModal = ({ show, handleClose, onCadastroCliente }: ModalProps) => {
-    const [submit, setSubmit] = useState<boolean>(false);
+    const [cliente, setCliente] = useState<TemporaryClientState>();
+    console.log({cliente})
+    const checkMissingClientData = () => {
+        if (!cliente ||
+            !cliente.nome ||
+            !cliente.sobrenome ||
+            !cliente.email.isValid ||
+            !cliente.senha.isValid)
+            return true;
+        return false;
+    }
+
+    console.log(checkMissingClientData())
 
     const handleFormSubmit = () => {
-        setSubmit(true);
+        if (cliente && !checkMissingClientData()) {
+            onCadastroCliente({
+                nome: cliente.nome,
+                sobrenome: cliente.sobrenome,
+                email: cliente.email.value,
+                senha: cliente.email.value
+            });
+            handleClose();
+        }
     }
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Teste</Modal.Title>
+                <Modal.Title>Cadastro de Usuários</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <CadastroClientes onCadastroCliente={onCadastroCliente} submit={submit}
+                <CadastroClientes setCliente={setCliente} handleClose={handleClose}
                 /> </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
-                <Button variant="primary" onClick={handleFormSubmit}>Save</Button>
+                <Button variant="primary" disabled={checkMissingClientData()} onClick={handleFormSubmit}>Save</Button>
             </Modal.Footer>
         </Modal>
     )

@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useReducer, useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import { Cliente } from "../../types/cliente";
+import { Form, Row, Col } from "react-bootstrap";
+import { TemporaryClientState } from "../../types/cliente";
 
-const emailReducer = (state: { value: string}, action: { type: string, value: string}) => {
+const emailReducer = (state: { value: string }, action: { type: string, value: string }) => {
   if (action.type === "USER_INPUT") {
     return {
       value: action.value,
@@ -28,7 +28,7 @@ const emailReducer = (state: { value: string}, action: { type: string, value: st
 };
 
 // Fazer validações para senha
-const senhaReducer = (state: { value: string}, action: { type: string, value: string}) => {
+const senhaReducer = (state: { value: string }, action: { type: string, value: string }) => {
   if (action.type === "USER_INPUT") {
     return {
       value: action.value,
@@ -54,8 +54,8 @@ const senhaReducer = (state: { value: string}, action: { type: string, value: st
 };
 
 interface ClienteProps {
-  onCadastroCliente: (cliente: Cliente) => void;
-  submit: boolean;
+  handleClose: () => void;
+  setCliente: (props: TemporaryClientState) => void;
 }
 
 export const CadastroClientes = (props: ClienteProps) => {
@@ -71,6 +71,11 @@ export const CadastroClientes = (props: ClienteProps) => {
     isValid: false,
   });
 
+  const [confirmaSenhaState, dispatchConfirmaSenha] = useReducer(senhaReducer, {
+    value: "",
+    isValid: false,
+  });
+
   const nomeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setNome(event.target.value);
   };
@@ -80,40 +85,49 @@ export const CadastroClientes = (props: ClienteProps) => {
   };
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatchEmail({ type: "USER_INPUT", value: event.target.value});
+    dispatchEmail({ type: "USER_INPUT", value: event.target.value });
   };
 
   const senhaChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatchSenha({ type: "USER_INPUT", value: event.target.value});
+    dispatchSenha({ type: "USER_INPUT", value: event.target.value });
   };
 
   const validateSenhaHandler = () => {
-      dispatchSenha({ type: 'INPUT_BLUR', value: ''})
+    dispatchSenha({ type: 'INPUT_BLUR', value: '' })
   };
 
   const validateEmailHandler = () => {
-    dispatchEmail({ type: 'INPUT_BLUR', value: ''})
+    dispatchEmail({ type: 'INPUT_BLUR', value: '' })
+  }
+
+  const cleanForm = () => {
+    setNome('');
+    setSobrenome('');
+    dispatchEmail({ type: 'FORM_CLEANUP', value: '' });
+    dispatchSenha({ type: 'FORM_CLEANUP', value: '' });
   }
 
   useEffect(() => {
-    const cliente = {
-      nome: nome,
-      sobrenome: sobrenome,
-      email: emailState.value,
-      senha: senhaState.value,
-  }
-  props.onCadastroCliente(cliente);
-  }, [props.submit])
+    cleanForm();
+  }, [])
 
-  // const submitHandler = (event: FormEvent) => {
-  //   event.preventDefault();
-    
-    
-  // }
+  useEffect(() => {
+      props.setCliente({
+        nome: nome,
+        sobrenome: sobrenome,
+        email: {
+          value: emailState.value,
+          isValid: emailState.isValid
+        },
+        senha: {
+          value: senhaState.value,
+          isValid: senhaState.isValid
+        }
+      })
+    }, [nome, sobrenome, emailState, senhaState]);
 
   return (
     <div className="pt-4">
-      <h5>Cadastro de usuário</h5>
       <Form>
         <Row>
           <Col>

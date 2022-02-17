@@ -33,8 +33,8 @@ export const Home = () => {
           <Col>
             <Landing />
             <div className="d-grid gap-2 d-md-flex justify-content-md-evenly">
-              <Button onClick={handleShow}>Entrar</Button>
-              <Button>Cadastrar</Button>
+              <Button>Entrar</Button>
+              <Button onClick={handleShow}>Cadastrar</Button>
             </div>
             <LoginHooks />
           </Col>
