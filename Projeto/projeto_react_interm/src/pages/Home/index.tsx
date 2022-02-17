@@ -3,6 +3,8 @@ import { Container } from "../../containers";
 import { Cliente } from "../../types/cliente";
 import { Row, Col, Button } from "react-bootstrap";
 import { usePost } from "../../hooks/customHooks";
+import { ListUserReview } from "../../components/ListUserReview";
+import { UserReviewProps } from "../../components/UserReview";
 // import LoginHooks from "../../hooks/loginHooks";
 import './home.scss';
 import { Landing } from "../../components/Landing";
@@ -35,6 +37,22 @@ export const Home = () => {
   });
 
 
+  
+  const listUserReview: UserReviewProps[] = [{
+    profile: "https://avatars.githubusercontent.com/academicodan",
+    comment: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    name: "Daniel"
+  }, {
+    profile: "https://avatars.githubusercontent.com/anacpbarros",
+    comment: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    name: "Ana"
+  },
+  {
+    profile: "https://avatars.githubusercontent.com/GigioR",
+    comment: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    name: "Giovanni"
+  }]
+
   return (
     <div className="landing-page">
       <Container>
@@ -50,7 +68,7 @@ export const Home = () => {
           <Col></Col>
         </Row>
         <Row>
-        <div>Conteudo</div>
+        <ListUserReview list={listUserReview}/>
         </Row>
       </Container>
     </div>
