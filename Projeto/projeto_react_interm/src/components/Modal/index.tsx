@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Alert, Button, Modal } from "react-bootstrap"
+import { Button, Modal } from "react-bootstrap"
+import LoginHooks from '../../hooks/loginHooks';
 import { Cliente, TemporaryClientState } from "../../types/cliente"
+import { ShowModalInterface } from '../../types/modal';
 import { CadastroClientes } from "../CadastroClientes"
+import Login from '../Login';
 
 interface ModalProps {
-    show: boolean;
+    show: ShowModalInterface;
     handleClose: () => void;
     onCadastroCliente: (cliente: Cliente) => void;
 }
@@ -36,8 +39,8 @@ export const SignInUpModal = ({ show, handleClose, onCadastroCliente }: ModalPro
         }
     }
 
-    return (
-        <Modal show={show} onHide={handleClose}>
+    const SignUpModal = show.type === "up" ?  (
+        <Modal show={show.show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Cadastro de Usuários</Modal.Title>
             </Modal.Header>
@@ -47,8 +50,31 @@ export const SignInUpModal = ({ show, handleClose, onCadastroCliente }: ModalPro
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
                 <Button variant="primary" disabled={checkMissingClientData()} onClick={handleFormSubmit}>Save</Button>
+                <LoginHooks />
             </Modal.Footer>
         </Modal>
+    ) : <></>;
+
+    const SignInModal = show.type === "in" ? (
+        <Modal show={show.show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Entrar</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Login />
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="primary" disabled={checkMissingClientData()} onClick={handleFormSubmit}>Save</Button>
+            </Modal.Footer>
+        </Modal>
+    ) : <></>;
+
+    return (
+        <>
+        {SignUpModal}
+        {SignInModal}
+        </>
     )
 }
 
