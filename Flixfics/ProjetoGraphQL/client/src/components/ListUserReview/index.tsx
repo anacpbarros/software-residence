@@ -8,7 +8,7 @@ interface ListUserReviewProps {
 
 export const ListUserReview: React.FC<ListUserReviewProps> = (listUserReview) => {
   return (
-    <>
+    <div>
       {listUserReview.list.map((userReviewItem) => {
         return (
           <Row className="container-review">
@@ -16,6 +16,6 @@ export const ListUserReview: React.FC<ListUserReviewProps> = (listUserReview) =>
           </Row>
         )
       })}
-    </>
+    </div>
   )
 }
