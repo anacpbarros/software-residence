@@ -1,0 +1,43 @@
+{
+    "translation": {
+        "cadastro": {
+            "nome": "Nome",
+            "sobrenome": "Sobrenome",
+            "senha": "Senha",
+            "email": "Email"
+        },
+        "pagina_inicial": {
+            "titulo": "FLIXFICS",
+            "clientes": "Clientes"
+        },
+        "copyright": "Copyright© 2022",
+        "login": {
+            "entrar": "Entrar",
+            "senha": "Senha",
+            "email": "Email",
+            "cadastro": "Cadastrar"
+        },
+        "logout": { 
+            "sucesso": "Saída feita com sucesso!",
+            "label": "Sair"
+        },
+        "modal": {
+            "label": "Cadastro de Usuários",
+            "cadastro": "Cadastrar",
+            "fechar": "Fechar",
+            "salvar": "Salvar",
+            "google": {
+                "entrar": "Entrar com Google",
+                "sair": "Sair"
+            } 
+        },
+        "fallback": "Carregando...",
+        "clients": {
+            "title": "Clientes da Flixfics",
+            "description": "Aqui você encontra uma lista de todos os nossos clientes com email para contato, caso deseje trocar informaçoes relacionadas a algum filme",
+            "firstname": "Nome",
+            "lastname": "Sobrenome",
+            "email": "Email"
+        }
+    }
+}

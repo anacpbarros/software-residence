@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nome": "Giovanni",
+        "sobrenome": "Pimenta",
+        "email": "giovanni@mail.com",
+        "senha": "12345678"
+    },
+    {
+        "id": 2,
+        "nome": "Ana",
+        "sobrenome": "Barros",
+        "email": "anab@mail.com",
+        "senha": "12345678"
+    },
+    {
+        "id": 3,
+        "nome": "Daniel",
+        "sobrenome": "Ribeiro",
+        "email": "daniribeiro@mail.com",
+        "senha": "12345678"
+    }
+]

@@ -1,0 +1,43 @@
+{
+  "translation": {
+    "registry": {
+      "name": "Name",
+      "last_name": "Last Name",
+      "password": "Password",
+      "email": "Email"
+    },
+    "home": {
+      "title": "FLIXFICS",
+      "clients": "Clients"
+    },
+    "copyright": "Copyright© 2022",
+    "login": {
+      "login": "Login",
+      "password": "Password",
+      "email": "Email",
+      "register": "Register"
+    },
+    "logout": {
+      "success": "Logout made successfully!",
+      "label": "Logout"
+    },
+    "modal": {
+      "label": "Users Registration",
+      "register": "Register",
+      "close": "Close",
+      "save": "Save",
+      "google": {
+        "sign_in": "Sign In",
+        "sign_out": "Sign Out"
+      }
+    },
+    "fallback": "Loading...",
+    "clients": {
+      "title": "Flixfics clients",
+      "description": "Here you will find a list of all our clients with contact email, in case you want to exchange information related to any movie.",
+      "firstname": "Name",
+      "lastname": "Last Name",
+      "email": "Email"
+    }
+  }
+}
